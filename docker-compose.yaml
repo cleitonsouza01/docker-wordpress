@@ -1,0 +1,81 @@
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:10.3'
+    container_name: ${DB_CONTAINER_NAME}
+    restart: always
+    volumes:
+      - ${MARIADB_VOLUME}:/bitnami
+    environment:
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_PORT_NUMBER=${MARIADB_PORT_NUMBER}
+      - MARIADB_ROOT_USER=${MARIADB_ROOT_USER}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - ALLOW_EMPTY_PASSWORD=no
+    ports:
+      - '${MARIADB_PORT_NUMBER}:${MARIADB_PORT_NUMBER}'
+
+  wordpress:
+    image: 'bitnami/wordpress:5.2.1-r13'
+    container_name: ${WP_CONTAINER_NAME}
+    restart: always
+    ports:
+      - ${WORDPRESS_PORT_NUMBER}:80
+    volumes:
+      - ${WORDPRESS_VOLUME}:/bitnami
+    depends_on:
+      - mariadb
+    environment:
+      # WORDPRESS_SKIP_INSTALL Force the container to not execute the WordPress installation wizard. 
+      # This is necessary in case you use a database that already has WordPress data. 
+      # Default: no
+      - WORDPRESS_SKIP_INSTALL=${WORDPRESS_SKIP_INSTALL}
+
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=${MARIADB_PORT_NUMBER}
+
+      - WORDPRESS_DATABASE_NAME=${MARIADB_DATABASE}      
+      - WORDPRESS_DATABASE_USER=${MARIADB_ROOT_USER}
+      - WORDPRESS_DATABASE_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - ALLOW_EMPTY_PASSWORD=no
+
+      - WORDPRESS_USERNAME=${WORDPRESS_USERNAME}
+      - WORDPRESS_PASSWORD=${WORDPRESS_PASSWORD}
+      - WORDPRESS_EMAIL=${WORDPRESS_EMAIL}
+      - WORDPRESS_FIRST_NAME=${WORDPRESS_FIRST_NAME}
+      - WORDPRESS_LAST_NAME=${WORDPRESS_LAST_NAME}
+      - WORDPRESS_BLOG_NAME=${WORDPRESS_BLOG_NAME}
+
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_PROTOCOL=${SMTP_PROTOCOL}
+
+  wp_backup:
+    image: wp_bkp
+    container_name: ${BKP_CONTAINER_NAME}
+    restart: always
+    volumes:
+      - ${BKP_VOLUME}:/backups
+      - ${WORDPRESS_VOLUME}:/var/www/html
+    depends_on:
+      - mariadb
+    environment:
+      - MYSQL_ENV_MYSQL_DATABASE=${MARIADB_DATABASE}
+      - MYSQL_ENV_MYSQL_USER=${MARIADB_ROOT_USER}
+      - MYSQL_ENV_MYSQL_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MYSQL_PORT_3306_TCP_PORT=${MARIADB_PORT_NUMBER} 
+      - MYSQL_ENV_MYSQL_PORT=${MARIADB_PORT_NUMBER}
+      - CLEANUP_OLDER_THAN=${CLEANUP_OLDER_THAN}
+
+networks:
+    default:
+       external:
+         name: webproxy
+
