@@ -1,19 +1,22 @@
 # Docker Wordpress Template
 
 ## What is it?
-This in pack of containers to provide infra-structure to a wordpress website, where provide a complete wordpress enviremont with backup routine and SSL certificate ready and simple.
+This in pack of containers to provide infra-structure to a wordpress website, where provide a complete wordpress enviremont with backup routine and SSL TLS certificate ready and simple.
 
-We using 3 containers to support Wordpress:
+We are using 3 containers to support Wordpress:
 - Wordpress container (using bitnani container)
 - Database container (using MariaDB)
 - Backup container (a thin linux just to manager backup routine of wordpress and database)
 
-And 3 containers to provide SSL certicate based in Letsencrypt.
+And 3 containers to provide letsencrypt SSL TLS certificate.
 - nginx-web
 - nginx-gen
 - nginx-letsencrypt
   
 This is based in docker-compose-letsencrypt-nginx-proxy-companion containers (more info in https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion)
+
+A special thanks to letsencrypt that become possible secure internet giving SSL TLS certificate for free. 
+More info about letencrypt project you can get in https://letsencrypt.org/
 
 
 ## Prerequeriments
@@ -52,24 +55,28 @@ Step by step to keep all running
 git clone https://github.com/cleitonsouza01/docker-wordpress
 ```
 
-1. Enter in docker-wordpress directory, create your own .env file based on .env-sample
+2. Enter in docker-wordpress directory, create your own .env file based on .env-sample
 ```
 cd docker-wordpress
 cp .env-sample .env
+```
+
+3. Open the .env file and customize it as you like
+```
 vim .env
 ```
 
-3. Setup docker configuration and create containers
+4. Setup docker configuration and create containers
 ```
 ./manager.sh setupcontainers
 ```
 
-4. Create base directories and fix permissions using manager.sh script:
+5. Create base directories and fix permissions using manager.sh script:
 ```
 ./manager.sh setupdir
 ```
 
-5. And finally lets start the structure in verbose mode to see if all is working fine
+6. And finally lets start the structure in verbose mode to see if all is working fine
 ```
 ./manager.sh startverbose
 ```
