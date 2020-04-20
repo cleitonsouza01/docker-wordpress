@@ -21,12 +21,18 @@ In order to run this container you'll need:
 
 - Linux Ubuntu 
 - Docker
+- Docker-compose
+
+For tests, I used it in a mac OS and it works well too, maybe can work in a Windows OS, as all enviroment run in a docker container, but I didn't test.
 
 
 ## Actual version that I am using
 ```
 uname -a
-Linux sunokrom-nyc1-01 4.15.0-50-generic #54-Ubuntu SMP Mon May 6 18:46:08 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+Linux nyc1-01 4.15.0-50-generic #54-Ubuntu SMP Mon May 6 18:46:08 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+
+cat /etc/issue
+Ubuntu 18.04.2 LTS \n \l
 
 docker --version
 Docker version 18.09.6, build 481bc77
@@ -37,28 +43,28 @@ docker-compose version 1.21.2, build a133471
 
 
 ## How setup your enviroment
-To make container administration easy, I made a shell script called manager.sh
+To make container administration easy, I made a shell script called manager.sh and we will use it in steps bellow
 
 Step by step to keep all running
 
 1. First you need clone this repositorie to you server
 ```
-git clone https://github.com/cleitonsouza01/docker-wordpress-template
+git clone https://github.com/cleitonsouza01/docker-wordpress
 ```
 
-2. Enter in docker-wordpress-template directory, create your own .env file based on .env-sample
+1. Enter in docker-wordpress directory, create your own .env file based on .env-sample
 ```
-cd docker-wordpress-template
+cd docker-wordpress
 cp .env-sample .env
 vim .env
 ```
 
-3. Lets setup docker configuration and create containers
+3. Setup docker configuration and create containers
 ```
 ./manager.sh setupcontainers
 ```
 
-4. Let's create base directories using manager.sh script:
+4. Create base directories and fix permissions using manager.sh script:
 ```
 ./manager.sh setupdir
 ```
@@ -68,12 +74,18 @@ vim .env
 ./manager.sh startverbose
 ```
 
-The first time that you start container is normal delay a little bit. When all is fine finilize the process using ctrl+c and then instart again using daemon mode
+The first time that you start container is normal delay a little bit. When all is fine finilize the process using ctrl+c and then start again using daemon mode
 ```
 ./manager.sh start
 ```
 
 Done! 
+
+To check your wordpress page just open a browser and then open:
+http://your-server-ip:port-you-choose-in-.env-file
+
+example:
+http://192.168.0.1:8050
 
 ## Issue on Mac OS
 For some reason that I will check later, if you using Mac OS probaly you will get error on DB container.
@@ -87,7 +99,7 @@ mkdir -p data/mariadb_data/
 ## Where is SSL certificate?
 To enable SSL certificate is incredible simple:
 
-1. Enter in docker-compose-letsencrypt-nginx-proxy-companion directory, create your .env file compying from .env.sample
+1. Enter in docker-compose-letsencrypt-nginx-proxy-companion directory, create your .env file copying from .env.sample
    ```
    cd docker-compose-letsencrypt-nginx-proxy-companion
    cp .env.sample .env
@@ -96,17 +108,17 @@ To enable SSL certificate is incredible simple:
 
 2. Setup you server IP in you DNS provider
    
-3. Stop your wordpress infra-structure using:
+3. Stop your wordpress infra-structure
 ```
 ./manager.sh stop
 ```
 
-3. Start docker-compose-letsencrypt-nginx-proxy-companion container using command bellow
+1. Start docker-compose-letsencrypt-nginx-proxy-companion container
 ```
 ./manager.sh startnginx
 ```
 
-3. Start you wordpress project:
+3. Start you wordpress project
 ```
 ./manager.sh start
 ```
@@ -128,60 +140,25 @@ docker exec yourproject_bkp restore 20141104
 ```
 
 
-
-## Other commands usage
-
-```
-./manager.sh createcontainers
-```
-This will create container structure in your server
-
----
-
-```
-./manager.sh start
-```
-This will start all containers of your infrastructure
-
----
-
-```
-./manager.sh createcontainers
-```
-This will create container structure in your server
-
----
-
-```
-./manager.sh createcontainers
-```
-This will create container structure in your server
-
----
-
-#### Environment Variables
+## Environment Variables
 
 The environment variables file is .env
 
 
-#### Volumes
+## Volumes
 
 * data/
 * backups/
 
 
-#### Useful File Locations
+## Useful File Locations
 
 * `manager.sh` - Main script to manager this container
   
 * `docker-compose.yaml` - Docker compose file
 
+
 ## Authors
 
 * Cleiton Souza - cleitonsouza01@gmail.com
-
-
-## License
-
-This project is licensed under the GNU GENERAL PUBLIC LICENSE v3
 
