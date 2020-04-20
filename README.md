@@ -75,6 +75,15 @@ The first time that you start container is normal delay a little bit. When all i
 
 Done! 
 
+## Issue on Mac OS
+For some reason that I will check later, if you using Mac OS probaly you will get error on DB container.
+A way to bypass it is creating manually the data directories, as bellow:
+```
+rm -rf data
+mkdir -p data/wordpress_data/
+mkdir -p data/mariadb_data/
+```
+
 ## Where is SSL certificate?
 To enable SSL certificate is incredible simple:
 
