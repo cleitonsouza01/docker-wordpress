@@ -62,7 +62,7 @@ case "$1" in
     ;;      
     startnginx)
         echo -e "[${GREEN}OK${RESTORE}] $PROJ_NAME starting docker-compose-letsencrypt-nginx-proxy-companion service..."
-        cd docker-compose-letsencrypt-nginx-proxy-companion
+        cd docker-letsencrypt
         ./start.sh
         cd..
     ;;
