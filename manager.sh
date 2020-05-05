@@ -44,8 +44,8 @@ function fixdir
         mkdir -p ./data/wordpress_data/ 
         chown -R 1001:1001 ./data/mariadb_data/
         chown -R 1000:daemon ./data/wordpress_data/
-        find ./data/wordpress_data/ -type d -exec chmod 755 {} \;  # Change directory permissions rwxr-xr-x
-        find ./data/wordpress_data/ -type f -exec chmod 664 {} \;  # Change file permissions rw-rw-r--
+        find ./data/wordpress_data/ -type d -exec chmod 777 {} \;  # Change directory permissions rwxrwxrwx
+        find ./data/wordpress_data/ -type f -exec chmod 777 {} \;  # Change file permissions rwxrwxrwx
 
         echo
         echo -e "[${GREEN}OK${RESTORE}] Wordpress permissions fixed."
