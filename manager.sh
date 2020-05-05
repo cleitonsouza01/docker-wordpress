@@ -101,11 +101,14 @@ case "$1" in
     setupcontainers)
         setupcontainers
         ;;
+    fixdir)
+        fixdir
+        ;;
 	*)
         echo "Manager docker tool"
 		echo "$0 usage:"
 		echo
-		echo "$0 { start | startverbose | stop | startnginx | setupdir | setupcontainers }"
+		echo "$0 { start | startverbose | stop | startnginx | setupdir | setupcontainers | fixdir }"
 		echo
         echo "More information please read README file of the project"
 		exit 1
