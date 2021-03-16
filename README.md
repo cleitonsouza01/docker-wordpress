@@ -13,7 +13,7 @@ And 3 containers to provide letsencrypt SSL TLS certificate.
 - nginx-gen
 - nginx-letsencrypt
   
-This is based in docker-compose-letsencrypt-nginx-proxy-companion containers (more info in https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion)
+This is based in docker-letsencrypt containers (more info in https://github.com/evertramos/docker-letsencrypt)
 
 A special thanks to letsencrypt that become possible secure internet giving SSL TLS certificate for free. 
 More info about letencrypt project you can get in https://letsencrypt.org/
@@ -106,9 +106,9 @@ mkdir -p data/mariadb_data/
 ## Where is SSL certificate?
 To enable SSL certificate is incredible simple:
 
-1. Enter in docker-compose-letsencrypt-nginx-proxy-companion directory, create your .env file copying from .env.sample
+1. Enter in docker-letsencrypt directory, create your .env file copying from .env.sample
    ```
-   cd docker-compose-letsencrypt-nginx-proxy-companion
+   cd docker-letsencrypt
    cp .env.sample .env
    cd..
    ```
@@ -120,7 +120,7 @@ To enable SSL certificate is incredible simple:
 ./manager.sh stop
 ```
 
-1. Start docker-compose-letsencrypt-nginx-proxy-companion container
+1. Start docker-letsencrypt container
 ```
 ./manager.sh startnginx
 ```
