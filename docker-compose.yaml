@@ -21,7 +21,7 @@ services:
     container_name: ${WP_CONTAINER_NAME}
     restart: always
     ports:
-      - ${WORDPRESS_PORT_NUMBER}:80
+      - ${WORDPRESS_PORT_NUMBER}:8080
     volumes:
       - ${WORDPRESS_VOLUME}:/bitnami
     depends_on:
