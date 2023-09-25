@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.3'
+    image: 'bitnami/mariadb:10.10.6-debian-11-r37'
     container_name: ${DB_CONTAINER_NAME}
     restart: always
     volumes:
@@ -17,7 +17,7 @@ services:
       - '${MARIADB_PORT_NUMBER}:${MARIADB_PORT_NUMBER}'
 
   wordpress:
-    image: 'bitnami/wordpress:5.2.1-r13'
+    image: 'bitnami/wordpress:6.3.1-debian-11-r21'
     container_name: ${WP_CONTAINER_NAME}
     restart: always
     ports:

@@ -1,5 +1,9 @@
 # Docker Wordpress Template
 
+## Change log
+- Wordpress updated to 6.3.1
+- MariaDB updated to 10.10.6
+
 ## What is it?
 This in pack of containers to provide infra-structure to a wordpress website, where provide a complete wordpress enviremont with backup routine and SSL TLS certificate ready and simple.
 

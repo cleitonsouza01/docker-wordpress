@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r388
+FROM ubuntu:23.10
 LABEL maintainer "Cleiton Souza <cleitonsouza01@gmail.com>"
 
 RUN apt-get update && \
