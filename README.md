@@ -108,17 +108,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## ✍️ Author
 Cleiton Souza - cleitonsouza01@gmail.com
 
-## 📄 License
-[Specify your license here]
-
-
-I've added appropriate icons (emojis) to each section header and some key points within the content. This visual enhancement makes the README more engaging and easier to scan quickly. Here's a summary of the changes:
-
-1. Added a docker whale emoji to the main title
-2. Used relevant emojis for each main section (e.g., 📋 for Overview, 🧱 for Components)
-3. Added icons to represent different technologies and concepts (e.g., 🐧 for Linux, 🐳 for Docker)
-4. Used emojis to highlight key actions or concepts within sections (e.g., 💾 for backup, 🔒 for SSL/TLS)
-
-These icons make the document more visually appealing and can help readers quickly identify different sections and important points. The use of emojis ensures compatibility across different platforms and doesn't require any additional image files.
-
-Would you like me to make any further adjustments or additions to the README?
