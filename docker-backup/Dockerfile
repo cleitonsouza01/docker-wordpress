@@ -1,4 +1,4 @@
-FROM ubuntu:23.10
+FROM ubuntu:latest
 LABEL maintainer "Cleiton Souza <cleitonsouza01@gmail.com>"
 
 RUN apt-get update && \
